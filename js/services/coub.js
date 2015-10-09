@@ -1,5 +1,5 @@
 app.factory('coub', ['$http', function($http){
-  return $http.get('https://s3.amazonaws.com/codecademy-content/courses/ltp4/forecast-api/forecast.json')
+  return $http.get('php/searchcoubs.php')
   .success(function(data){
     return data;
   })

@@ -2,9 +2,13 @@ var videoSource = {};
 
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 
+	$scope.coubText = "Rocket";
+
   $scope.fetch = function(){
-    coub.success(function(data){
+		console.log($scope.coubText);
+    coub.getCoubs().success(function(data){
       //$scope.coubVideo = data.coubs;
+			//console.log(data);
       videoSource = data.coubs;
 
       // Test console output

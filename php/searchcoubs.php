@@ -1,17 +1,15 @@
 <?php
 
-$myCoubText = 0;
-$myOrderBy = 0;
+$myParams = json_decode(file_get_contents('php://input'),true);
+//print_r(count($myParams['coubText']));
 
-$myCoubText = urlencode($_POST["coubText"]);
-if($myCoubText == 0){
-  $myCoubText = 'rocket';
-} 
-
-$myOrderBy = $_POST["orderBy"];
-if($myOrderBy == 0){
-  $myOrderBy = 'newest_popular';
+if(!empty($myParams['coubText'])){
+	$myCoubText = $myParams['coubText'];
+} else {
+	$myCoubText = "rocket";
 }
+
+$myOrderBy = 'newest_popular';
 
 function remote_get_contents($url)
 {
@@ -37,8 +35,8 @@ $coubSearchResp = remote_get_contents($coubApiUrl);
 
 echo $coubSearchResp;
 
-//$fp = fopen('json/coubs.json', 'w');
-//fwrite($fp, $coubSearchResp);
-//fclose($fp);
+$fp = fopen('json/coubs.json', 'w');
+fwrite($fp, $coubSearchResp);
+fclose($fp);
 
 ?>

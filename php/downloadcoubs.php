@@ -1,7 +1,6 @@
 <?php
 
 include 'functions.php';
-include 'simple_html_dom.php';
 
 $myParams = json_decode(file_get_contents('php://input'),true);
 //print_r($myParams['coubText']);

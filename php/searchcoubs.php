@@ -30,7 +30,7 @@ function curl_get_contents($url)
     return $output;
 }
 
-$coubApiUrl = "http://coub.com/api/v2/search?q=".$myCoubText."&order_by=".$myOrderBy;
+$coubApiUrl = "http://coub.com/api/v2/search?q=".urlencode($myCoubText)."&order_by=".$myOrderBy;
 $coubSearchResp = remote_get_contents($coubApiUrl);
 
 echo $coubSearchResp;

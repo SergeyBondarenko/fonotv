@@ -1,44 +1,52 @@
-var videoSource = {};
+function playVideo(video_source){
+	// Test console output
+	for(var i = 0; i < video_source.length; i++){
+	  console.log(video_source[i].file);
+	} 
+	
+	// Play coubs
+	var videoCount = video_source.length; 
+	var videoId = 0;
+	
+	document.getElementById("myVideo").setAttribute("src",video_source[0].file);
+	function videoPlay(videoNum)
+	{
+	  document.getElementById("myVideo").setAttribute("src",video_source[videoNum].file);
+	  document.getElementById("myVideo").load();
+	  document.getElementById("myVideo").play();
+	}
+	 
+	document.getElementById('myVideo').addEventListener('ended',myHandler,false);
+	function myHandler(){
+	  if (videoId == (videoCount - 1)){
+	    videoId = 0;
+	    videoPlay(videoId);
+	  } else {
+	    videoId++;
+	    videoPlay(videoId);
+	  }
+	}
+}
 
+var video_source = {};
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	
-	$scope.coubText = 'Rocket';
+	$scope.coubText = 'Space ship';
 
+	// Play default video
+	coub.getCoubs($scope.coubText).success(function(data){
+		video_source = data.coubs;	
+		playVideo(video_source);
+	});
+
+	// Search for video and insert it
   $scope.fetch = function(){
-		console.log($scope.coubText);
+		// Search for video
     coub.getCoubs($scope.coubText).success(function(data){
-      //$scope.coubVideo = data.coubs;
-			//console.log(data);
-      videoSource = data.coubs;
-
-      // Test console output
-      for(var i = 0; i < videoSource.length; i++){
-        console.log(videoSource[i].file);
-      } 
-
-      // Play coubs
-      var videoCount = videoSource.length; 
-      var videoId = 0;
-      
-      document.getElementById("myVideo").setAttribute("src",videoSource[0].file);
-      function videoPlay(videoNum)
-      {
-        document.getElementById("myVideo").setAttribute("src",videoSource[videoNum].file);
-        document.getElementById("myVideo").load();
-        document.getElementById("myVideo").play();
-      }
-       
-      document.getElementById('myVideo').addEventListener('ended',myHandler,false);
-      function myHandler(){
-        if (videoId == (videoCount - 1)){
-          videoId = 0;
-          videoPlay(videoId);
-        } else {
-          videoId++;
-          videoPlay(videoId);
-        }
-      }
-    }); //End of coub service factory
-  } // End of fetch()
+      video_source = data.coubs;
+			// Insert video in DOM
+			playVideo(video_source);
+    }); 
+  }
 
 }]);

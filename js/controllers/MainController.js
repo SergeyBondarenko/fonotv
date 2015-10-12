@@ -32,9 +32,11 @@ var video_source = {};
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	
 	$scope.coubText = 'Space ship';
+	$search_coubs = 'php/searchcoubs.php';
+	$download_coubs = 'php/downloadcoubs.php';
 
 	// Play default video
-	coub.getCoubs($scope.coubText).success(function(data){
+	coub.getCoubs($search_coubs, $scope.coubText).success(function(data){
 		video_source = data.coubs;	
 		playVideo(video_source);
 	});
@@ -42,11 +44,17 @@ app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	// Search for video and insert it
   $scope.fetch = function(){
 		// Search for video
-    coub.getCoubs($scope.coubText).success(function(data){
+    coub.getCoubs($search_coubs, $scope.coubText).success(function(data){
       video_source = data.coubs;
 			// Insert video in DOM
 			playVideo(video_source);
     }); 
   }
+
+	$scope.downloadCoub = function(){
+		coub.getCoubs($download_coubs, $scope.coubPageUrl).success(function(data){
+			$scope.coubVideoLink = data;
+		});
+	}
 
 }]);

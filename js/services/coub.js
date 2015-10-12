@@ -1,9 +1,9 @@
 app.factory('coub', ['$http', function($http){
 
-	var urlBase = 'php/searchcoubs.php';
 	var coub = {};
 
-	coub.getCoubs = function(coubText){
+	coub.getCoubs = function(phpScript, coubText){
+		var urlBase = phpScript;
     return $http.post(urlBase, {coubText: coubText})
     .success(function(data){
       return data;

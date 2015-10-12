@@ -14,6 +14,14 @@
   
   <video width="320" height="240" preload='none' controls autoplay muted id="myVideo" ></video>
   <br>
+
+	<div>
+		<h3>Coub. Enter URL to download: </h3>	
+  	<input type="url" size="38" ng-model="coubPageUrl" name="coubPageUrl" />
+    <button id="fetchbtn" ng-click="downloadCoub()">Submit</button>
+		<a ng-href="{{coubVideoLink}}">{{coubVideoLink}}</a>
+		<p>{{coubDownload}}</p>
+	</div>
   
 </div>
 

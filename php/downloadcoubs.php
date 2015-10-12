@@ -29,7 +29,12 @@ $potJsonStr = substr($potJsonStr, 10);
 
 $jsonStr = json_decode($potJsonStr, true);
 
-echo $jsonStr["file_versions"]["html5"]["video"]["high"]["url"];
+if(array_key_exists('video', $jsonStr["file_versions"]["html5"])){
+	echo $jsonStr["file_versions"]["html5"]["video"]["high"]["url"];
+} else if(array_key_exists('url', $jsonStr["file_versions"]["iphone"])){
+	echo $jsonStr["file_versions"]["iphone"]["url"];
+}
+
 //print_r($jsonStr); 
 
 ?>

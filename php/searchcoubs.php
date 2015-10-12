@@ -1,11 +1,17 @@
 <?php
 
 $myCoubText = 0;
+$myOrderBy = 0;
 
-//$myCoubText = urlencode($_POST["coubText"]);
-//$myOrderBy = $_POST["orderBy"];
-$myCoubText = 'rocket';
-$myOrderBy = 'newest_popular';
+$myCoubText = urlencode($_POST["coubText"]);
+if($myCoubText == 0){
+  $myCoubText = 'rocket';
+} 
+
+$myOrderBy = $_POST["orderBy"];
+if($myOrderBy == 0){
+  $myOrderBy = 'newest_popular';
+}
 
 function remote_get_contents($url)
 {
@@ -31,8 +37,8 @@ $coubSearchResp = remote_get_contents($coubApiUrl);
 
 echo $coubSearchResp;
 
-$fp = fopen('json/coubs.json', 'w');
-fwrite($fp, $coubSearchResp);
-fclose($fp);
+//$fp = fopen('json/coubs.json', 'w');
+//fwrite($fp, $coubSearchResp);
+//fclose($fp);
 
 ?>

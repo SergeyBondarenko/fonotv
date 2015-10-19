@@ -18,8 +18,4 @@ $coubSearchResp = remote_get_contents($coubApiUrl);
 
 echo $coubSearchResp;
 
-/*$fp = fopen('json/coubs.json', 'w');
-fwrite($fp, $coubSearchResp);
-fclose($fp);
-*/
 ?>

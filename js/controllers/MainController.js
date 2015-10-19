@@ -1,4 +1,4 @@
-function playVideo(video_source){
+function playVideo(video_source, videoTag){
 	// Test console output
 	for(var i = 0; i < video_source.length; i++){
 	  console.log(video_source[i].file);
@@ -8,15 +8,15 @@ function playVideo(video_source){
 	var videoCount = video_source.length; 
 	var videoId = 0;
 	
-	document.getElementById("myVideo").setAttribute("src",video_source[0].file);
+	document.getElementById(videoTag).setAttribute("src",video_source[0].file);
 	function videoPlay(videoNum)
 	{
-	  document.getElementById("myVideo").setAttribute("src",video_source[videoNum].file);
-	  document.getElementById("myVideo").load();
-	  document.getElementById("myVideo").play();
+	  document.getElementById(videoTag).setAttribute("src",video_source[videoNum].file);
+	  document.getElementById(videoTag).load();
+	  document.getElementById(videoTag).play();
 	}
 	 
-	document.getElementById('myVideo').addEventListener('ended',myHandler,false);
+	document.getElementById(videoTag).addEventListener('ended',myHandler,false);
 	function myHandler(){
 	  if (videoId == (videoCount - 1)){
 	    videoId = 0;
@@ -32,28 +32,51 @@ var video_source = {};
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	
 	$scope.coubText = 'Space ship';
-	$search_coubs = 'php/searchcoubs.php';
-	$download_coubs = 'php/downloadcoubs.php';
+	var search_coubs = 'php/searchcoubs.php';
+	var download_coubs = 'php/downloadcoubs.php';
+	var local_json = 'json/coubs.json';
+	var system_calls = 'php/systemcalls.php';
 
-	// Play default video
-	coub.getCoubs($search_coubs, $scope.coubText).success(function(data){
+	// Default play video
+	coub.getCoubs(search_coubs, $scope.coubText).success(function(data){
 		video_source = data.coubs;	
-		playVideo(video_source);
+		playVideo(video_source, "myVideo");
+	});
+
+	// Default play FonoTV video
+	coub.getCoubsForFTV(local_json).success(function(data){
+		video_source = data;	
+		playVideo(video_source, "videoFTV");
 	});
 
 	// Search for video and insert it
   $scope.fetch = function(){
 		// Search for video
-    coub.getCoubs($search_coubs, $scope.coubText).success(function(data){
+    coub.getCoubs(search_coubs, $scope.coubText).success(function(data){
       video_source = data.coubs;
 			// Insert video in DOM
-			playVideo(video_source);
+			playVideo(video_source, "myVideo");
     }); 
   }
 
 	$scope.downloadCoub = function(){
-		coub.getCoubs($download_coubs, $scope.coubPageUrl).success(function(data){
+		coub.getCoubs(download_coubs, $scope.coubPageUrl).success(function(data){
 			$scope.coubVideoLink = data;
+		});
+	}
+
+	$scope.readDbFTV = function(){
+		// Play FonoTV video
+		coub.getCoubsForFTV(local_json).success(function(data){
+			video_source = data;	
+			playVideo(video_source, "videoFTV");
+		});
+	}
+
+	$scope.deleteDbFTV = function(){
+		// Delete FonoTV DB
+		coub.deleteDbFTV(system_calls, local_json).success(function(data){
+			video_source = data;	
 		});
 	}
 

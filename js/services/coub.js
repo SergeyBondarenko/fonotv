@@ -13,6 +13,27 @@ app.factory('coub', ['$http', function($http){
     });
 	};
 	
+	coub.getCoubsForFTV = function(local_json){
+    return $http.post(local_json)
+    .success(function(data){
+      return data;
+    })
+    .error(function(err){
+      return err;
+    });
+	};
+	
+	coub.deleteDbFTV = function(system_calls, local_json){
+		var urlBase = system_calls;
+    return $http.post(urlBase, {coubDB: local_json})
+    .success(function(data){
+      return data;
+    })
+    .error(function(err){
+      return err;
+    });
+	};
+	
 	return coub;
 
 }]);

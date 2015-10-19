@@ -22,6 +22,14 @@
 		<a ng-href="{{coubVideoLink}}">{{coubVideoLink}}</a>
 		<p>{{coubDownload}}</p>
 	</div>
+
+	<div>
+		<h3>Use <a href="chrome/share_page_to_fonotv.zip">Chrome extension</a> to add links to the video list. </h3>	
+    <button id="resetFTVbtn" ng-click="readDbFTV()">Read Database</button>
+    <button id="resetFTVbtn" ng-click="deleteDbFTV()">Delete Database</button>
+		<br>
+  	<video width="320" height="240" preload='none' controls autoplay muted id="videoFTV" ></video>
+	</div>
   
 </div>
 

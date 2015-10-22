@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <body ng-app="fonotv">
 
 <div class="main" ng-controller="MainController">
@@ -28,7 +29,9 @@
     <button id="resetFTVbtn" ng-click="readDbFTV()">Read Database</button>
     <button id="resetFTVbtn" ng-click="deleteDbFTV()">Delete Database</button>
 		<br>
-  	<video width="320" height="240" preload='auto' controls autoplay muted id="videoFTV" ></video>
+  	<video width="320" height="240" preload='auto' controls autoplay muted id="videoFTV" >
+      <source src="http://storage.akamai.coub.com/get/b142/p/coub/simple/cw_file/d529e488088/33f9e73254ceb2ca728d1/muted_mp4_big_size_1445523554_muted_big.mp4" >
+    </video>
 	</div>
   <div>
     <iframe width="320" height="240" src="https://www.youtube.com/embed/1EDy-g1Zyr0?autoplay=1&controls=1&showinfo=0" frameborder="0" allowfullscreen></iframe>
@@ -39,6 +42,7 @@
 <script src="js/app.js"></script>
 <script src="js/controllers/MainController.js"></script>
 <script src="js/services/coub.js"></script>
+
 
 </body>
 </html>

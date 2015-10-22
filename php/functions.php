@@ -19,4 +19,31 @@ function curl_get_contents($url)
     return $output;
 }
 
+function get_coub_video_link($html, $pageUrl)
+{
+	$doc = new DOMDocument();
+	libxml_use_internal_errors(true);
+	@$doc->loadHTML($html); // loads your HTML
+	$xpath = new DOMXPath($doc);
+	// returns a list of all links with rel=nofollow
+	$nlist = $xpath->query("//script[@id='coubPageCoubJson']");
+	
+	$potJsonStr = '';
+	foreach($nlist as $node){
+		$potJsonStr .= "{$node->nodeName} - {$node->nodeValue}";
+	}
+	
+	$potJsonStr = substr($potJsonStr, 10);
+	
+	$jsonStr = json_decode($potJsonStr, true);
+	
+	if(array_key_exists('video', $jsonStr["file_versions"]["html5"])){
+		$pageUrl = $jsonStr["file_versions"]["html5"]["video"]["high"]["url"];
+	} else if(array_key_exists('url', $jsonStr["file_versions"]["iphone"])){
+		$pageUrl = $jsonStr["file_versions"]["iphone"]["url"];
+	}
+
+	return $pageUrl;
+}
+
 ?>

@@ -32,10 +32,10 @@ var video_source = {};
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	
 	$scope.coubText = 'Space ship';
-	var search_coubs = 'php/searchcoubs.php';
-	var download_coubs = 'php/downloadcoubs.php';
-	var local_json = 'json/coubs.json';
-	var system_calls = 'php/systemcalls.php';
+	//var search_coubs = 'php/searchcoubs.php';
+	//var download_coubs = 'php/downloadcoubs.php';
+	var local_json = 'php/apimongo.php';
+	//var system_calls = 'php/systemcalls.php';
 
 	// Default play video
 	//coub.getCoubs(search_coubs, $scope.coubText).success(function(data){

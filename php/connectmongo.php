@@ -21,9 +21,9 @@ if(isset($_GET["removeall"])){
 $docs = $collection->find();
 
 //print_r($docs);
-//foreach($docs as $doc){
-//	echo $doc["_id"] . $doc["file"] . "\n";
-//}
+foreach($docs as $doc){
+	echo $doc["_id"] . $doc["file"] . "\n";
+}
 
 echo "<html><body>";
 echo "<h2><a href='connectmongo.php'>Reconnect</a></h2>";

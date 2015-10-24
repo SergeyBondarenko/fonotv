@@ -39,11 +39,12 @@ function get_coub_video_link($html, $pageUrl)
 	
 	if(array_key_exists('video', $jsonStr["file_versions"]["html5"])){
 		$pageUrl = $jsonStr["file_versions"]["html5"]["video"]["high"]["url"];
+	  return $pageUrl;
 	} else if(array_key_exists('url', $jsonStr["file_versions"]["iphone"])){
 		$pageUrl = $jsonStr["file_versions"]["iphone"]["url"];
+	  return $pageUrl;
 	}
 
-	return $pageUrl;
 }
 
 ?>

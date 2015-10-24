@@ -8,9 +8,17 @@ function playVideo(video_source, videoTag){
 	var videoCount = video_source.length; 
 	var videoId = 0;
 	
+  //var local_file = video_source[0].file;
+  //local_file = local_file.split("/");
+  //local_file = "video/" + local_file[local_file.length - 1];
+	//document.getElementById(videoTag).setAttribute("src",local_file);
 	document.getElementById(videoTag).setAttribute("src",video_source[0].file);
 	function videoPlay(videoNum)
 	{
+    //local_file = video_source[videoNum].file;
+    //local_file = local_file.split("/");
+    //local_file = "video/" + local_file[local_file.length - 1];
+	  //document.getElementById(videoTag).setAttribute("src",video_source[videoNum].file);
 	  document.getElementById(videoTag).setAttribute("src",video_source[videoNum].file);
 	  document.getElementById(videoTag).load();
 	  document.getElementById(videoTag).play();

@@ -46,7 +46,7 @@ app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	// Default play FonoTV video
 	coub.getCoubsForFTV(local_json).success(function(data){
 		video_source = data;	
-		playVideo(video_source, "videoFTV");
+		playVideo(video_source, "video-about");
 	});
 
 	// Search for video and insert it
@@ -69,7 +69,7 @@ app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 		// Play FonoTV video
 		coub.getCoubsForFTV(local_json).success(function(data){
 			video_source = data;	
-			playVideo(video_source, "videoFTV");
+			playVideo(video_source, "video-about");
 		});
 	}
 

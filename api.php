@@ -9,21 +9,23 @@ $dbFile = 'json/coubs.json';
 $pageUrl = filter_var($pageUrl, FILTER_SANITIZE_URL);
 
 if (!filter_var($pageUrl, FILTER_VALIDATE_URL) === false) {
-  
-  //Get HTML for coub.com
-  $html = remote_get_contents($pageUrl);
-  
-  //Parse HTML and get url for coub video
-  $pageUrl = get_coub_video_link($html, $pageUrl);
-  
-	// Save to db
-	$mongo = new MongoClient();
-	$db = $mongo->fonotv;
-	$collection = $db->hyperlinks;
-	
-	$document = array("file" => $pageUrl);
-	$collection->insert($document);
 
+  if(parse_url($pageUrl, PHP_URL_HOST) == "coub.com"){
+  
+    //Get HTML for coub.com
+    $html = remote_get_contents($pageUrl);
+    
+    //Parse HTML and get url for coub video
+    $pageUrl = get_coub_video_link($html, $pageUrl);
+    
+	  // Save to db
+	  $mongo = new MongoClient();
+	  $db = $mongo->fonotv;
+	  $collection = $db->hyperlinks;
+	  
+	  $document = array("file" => $pageUrl);
+	  $collection->insert($document);
+  }
 
   //if(file_exists($dbFile)){
   //	$videoJson = file_get_contents($dbFile, LOCK_EX);

@@ -13,6 +13,9 @@ function playVideo(video_source, videoTag){
   //local_file = "video/" + local_file[local_file.length - 1];
 	//document.getElementById(videoTag).setAttribute("src",local_file);
 	document.getElementById(videoTag).setAttribute("src",video_source[0].file);
+	 
+	document.getElementById(videoTag).addEventListener('ended',myHandler,false);
+
 	function videoPlay(videoNum)
 	{
     //local_file = video_source[videoNum].file;
@@ -23,8 +26,7 @@ function playVideo(video_source, videoTag){
 	  document.getElementById(videoTag).load();
 	  document.getElementById(videoTag).play();
 	}
-	 
-	document.getElementById(videoTag).addEventListener('ended',myHandler,false);
+
 	function myHandler(){
 	  if (videoId == (videoCount - 1)){
 	    videoId = 0;

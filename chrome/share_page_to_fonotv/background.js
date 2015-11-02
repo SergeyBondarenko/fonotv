@@ -14,7 +14,7 @@ function executeMailto(tab_id, subject, body, selection) {
   var pageUrl = encodeURIComponent(body);
   pageUrl = 'url=' + pageUrl;
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://www.fonotv/api.php", true);
+  xhr.open("POST", "http://www.fonotv.com/api.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.setRequestHeader("Content-length", pageUrl.length);
   xhr.setRequestHeader("Connection", "close");

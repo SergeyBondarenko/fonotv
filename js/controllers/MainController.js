@@ -1,4 +1,7 @@
 function playVideo(video_source, videoTag){
+	var video = document.getElementById(videoTag); 
+	var play_music = document.getElementById('play-music');
+
 	// Test console output
 	for(var i = 0; i < video_source.length; i++){
 	  console.log(video_source[i].file);
@@ -8,14 +11,24 @@ function playVideo(video_source, videoTag){
 	var videoCount = video_source.length; 
 	var videoId = 0;
 	
-	document.getElementById(videoTag).setAttribute("src",video_source[0].file);
-	document.getElementById(videoTag).addEventListener('ended',myHandler,false);
+	video.setAttribute("src",video_source[0].file);
+	video.addEventListener('ended',myHandler,false);
+	play_music.addEventListener('click', function(){
+  	muteVideo(video); 
+  }, false);
+
+	function muteVideo(video){
+		if(video.muted)
+			video.muted = false;
+		else
+			video.muted = true;	
+	}
 
 	function videoPlay(videoNum)
 	{
-	  document.getElementById(videoTag).setAttribute("src",video_source[videoNum].file);
-	  document.getElementById(videoTag).load();
-	  document.getElementById(videoTag).play();
+	  video.setAttribute("src",video_source[videoNum].file);
+	  video.load();
+	  video.play();
 	}
 
 	function myHandler(){
@@ -41,19 +54,11 @@ app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 		playVideo(video_source, "video-about");
 	});
 
-	$scope.readDbFTV = function(){
-		// Play FonoTV video
-		coub.getCoubsForFTV(local_json).success(function(data){
-			video_source = data;	
-			playVideo(video_source, "video-about");
-		});
-	}
-
-	$scope.deleteDbFTV = function(){
-		// Delete FonoTV DB
-		coub.deleteDbFTV(system_calls, local_json).success(function(data){
-			video_source = data;	
-		});
-	}
+	//$scope.deleteDbFTV = function(){
+	//	// Delete FonoTV DB
+	//	coub.deleteDbFTV(system_calls, local_json).success(function(data){
+	//		video_source = data;	
+	//	});
+	//}
 
 }]);

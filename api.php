@@ -33,6 +33,7 @@ if (!filter_var($pageUrl, FILTER_VALIDATE_URL) === false) {
 	
 	// Construct a DB document
 	$document = array("source" => $COUB, "orig_page" => $orig_pageUrl, "likes" => 0);
+	$document["title"] = $pageUrl["title"]; 
 	$document["file"] = $pageUrl["video_mobile_res"]; 
 	$document["video_mobile_res"] = $pageUrl["video_mobile_res"]; 
 	$document["video_high_res_muted"] = $pageUrl["video_high_res_muted"]; 

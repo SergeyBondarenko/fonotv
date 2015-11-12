@@ -66,6 +66,9 @@ function get_coub_video_link($html, $pageUrl)
 		$pageUrl["video_mobile_res"] = $jsonStr["file"];
 	}
 
+	if(array_key_exists("title", $jsonStr))
+		$pageUrl["title"] = $jsonStr["title"];
+
 	return $pageUrl;
 
 	#if(array_key_exists('video', $jsonStr["file_versions"]["html5"])){

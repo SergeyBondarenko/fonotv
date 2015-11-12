@@ -15,8 +15,8 @@ function playVideo(video_source, videoTag){
 	
 	// Set first video
 	video.setAttribute("src",video_source[0].file);
-	//video_link.setAttribute("href",video_source[0].orig_page);
-	//video_link_title.textContent = video_source[0].title;
+	video_link.setAttribute("href",video_source[0].orig_page);
+	video_link_title.textContent = video_source[0].title;
 
 	// Listen for video end and run handler to play other videos
 	video.addEventListener('ended',myHandler,false);
@@ -37,8 +37,8 @@ function playVideo(video_source, videoTag){
 	function videoPlay(videoNum, mute)
 	{
 	  video.setAttribute("src",video_source[videoNum].file);
-		//video_link.setAttribute("href",video_source[videoNum].orig_page);
-		//video_link_title.textContent = video_source[videoNum].title;
+		video_link.setAttribute("href",video_source[videoNum].orig_page);
+		video_link_title.textContent = video_source[videoNum].title;
 
 	  video.load();
 		if(mute == true)

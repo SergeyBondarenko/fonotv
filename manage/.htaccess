@@ -1,0 +1,5 @@
+AuthName "Secure Area"
+AuthType Basic
+AuthUserFile /var/www/fonotv.com/.htpasswd
+require valid-user
+#require user dmin

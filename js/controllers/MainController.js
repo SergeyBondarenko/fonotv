@@ -1,3 +1,32 @@
+//// Check if URL exists
+//function setTheVideoLink(video_array, htmlTag){
+//	var video = document.getElementById(htmlTag); 
+//	var video_link = document.getElementById('orig-link');
+//	var video_link_title = document.getElementById('orig-link-title');
+//	var i = 0;
+//	var link_alive = 0;
+//	while(link_alive == 0){
+//		var request = new XMLHttpRequest();  
+//		request.open('GET', video_array[i], true);
+//		request.onreadystatechange = function(){
+//		    if (request.readyState === 4){
+//		        if (request.status === 404) {  
+//							console.log("Link is dead :-(");
+//							//i++;
+//		        } else if(request.status === 200){
+//							link_alive = 1;
+//							console.log("Link is alive!");
+//							//video.setAttribute("src",video_array[i].file);
+//							//video_link.setAttribute("href",video_array[i].orig_page);
+//							//video_link_title.textContent = video_array[i].title;
+//						}
+//		    } 
+//		};
+//	}
+//	request.send();
+//}
+
+// Function to play videos
 function playVideo(video_source, videoTag){
 	var video = document.getElementById(videoTag); 
 	var play_music = document.getElementById('play-music');
@@ -5,15 +34,16 @@ function playVideo(video_source, videoTag){
 	var video_link_title = document.getElementById('orig-link-title');
 
 	// Test console output
-	for(var i = 0; i < video_source.length; i++){
-	  console.log(video_source[i].file);
-	} 
+	//for(var i = 0; i < video_source.length; i++){
+	//  console.log(video_source[i].file);
+	//} 
 	
 	// Play coubs
 	var videoCount = video_source.length; 
 	var videoId = 0;
 	
-	// Set first video
+	// Set the first video
+	//setTheVideoLink(video_source, videoTag);
 	video.setAttribute("src",video_source[0].file);
 	video_link.setAttribute("href",video_source[0].orig_page);
 	video_link_title.textContent = video_source[0].title;
@@ -67,9 +97,9 @@ function playVideo(video_source, videoTag){
 }
 
 var video_source = {};
+// Execute the main controller stuff
 app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	
-	$scope.coubText = 'Space ship';
 	var local_json = 'php/apimongo.php';
 
 	// Default play FonoTV video

@@ -1,3 +1,5 @@
+var LOOP = 0;
+
 //// Check if URL exists
 //function setTheVideoLink(video_array, htmlTag){
 //	var video = document.getElementById(htmlTag); 
@@ -95,8 +97,14 @@ function playVideo(video_source, videoTag, videoNext){
 	    videoId = 0;
 	    playVideoForHandler(videoId, mute);
 	  } else {
-	    videoId++;
-	    playVideoForHandler(videoId, mute);
+			if(LOOP == 0){
+	    	playVideoForHandler(videoId, mute);
+				LOOP = 1;
+			} else {
+	    	videoId++;
+	    	playVideoForHandler(videoId, mute);
+				LOOP = 0;
+			}
 	  }
 	}
 }

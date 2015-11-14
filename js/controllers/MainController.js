@@ -27,8 +27,9 @@
 //}
 
 // Function to play videos
-function playVideo(video_source, videoTag){
+function playVideo(video_source, videoTag, videoNext){
 	var video = document.getElementById(videoTag); 
+	var video_next = document.getElementById(videoNext); 
 	var play_music = document.getElementById('play-music');
 	var video_link = document.getElementById('orig-link');
 	var video_link_title = document.getElementById('orig-link-title');
@@ -48,6 +49,8 @@ function playVideo(video_source, videoTag){
 	video_link.setAttribute("href",video_source[0].orig_page);
 	video_link_title.textContent = video_source[0].title;
 
+	//video_next.setAttribute("src",video_source[1].file);
+
 	// Listen for video end and run handler to play other videos
 	video.addEventListener('ended',myHandler,false);
 
@@ -64,11 +67,13 @@ function playVideo(video_source, videoTag){
 	}
 
 	// Play all other videos
-	function videoPlay(videoNum, mute)
+	function playVideoForHandler(videoNum, mute)
 	{
 	  video.setAttribute("src",video_source[videoNum].file);
 		video_link.setAttribute("href",video_source[videoNum].orig_page);
 		video_link_title.textContent = video_source[videoNum].title;
+
+		//video_next.setAttribute("src",video_source[videoNum + 1].file);
 
 	  video.load();
 		if(mute == true)
@@ -88,10 +93,10 @@ function playVideo(video_source, videoTag){
 
 	  if (videoId == (videoCount - 1)){
 	    videoId = 0;
-	    videoPlay(videoId, mute);
+	    playVideoForHandler(videoId, mute);
 	  } else {
 	    videoId++;
-	    videoPlay(videoId, mute);
+	    playVideoForHandler(videoId, mute);
 	  }
 	}
 }
@@ -105,7 +110,7 @@ app.controller('MainController', ['$scope', 'coub', function($scope, coub){
 	// Default play FonoTV video
 	coub.getCoubsForFTV(local_json).success(function(data){
 		video_source = data;	
-		playVideo(video_source, "video-about");
+		playVideo(video_source, "video-about", "video-about-next");
 	});
 
 	//$scope.deleteDbFTV = function(){

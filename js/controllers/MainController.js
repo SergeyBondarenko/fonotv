@@ -45,11 +45,14 @@ function playVideo(video_source, videoTag, videoNext){
 	var videoCount = video_source.length; 
 	var videoId = 0;
 	
-	// Set the first video
+	// Set the first video that starts automatically
 	//setTheVideoLink(video_source, videoTag);
 	video.setAttribute("src",video_source[0].file);
 	video_link.setAttribute("href",video_source[0].orig_page);
 	video_link_title.textContent = video_source[0].title;
+
+  var video_check_live = document.getElementById(videoTag); 
+  console.log(video_check_live.readyState());
 
 	//video_next.setAttribute("src",video_source[1].file);
 
@@ -78,6 +81,7 @@ function playVideo(video_source, videoTag, videoNext){
 		//video_next.setAttribute("src",video_source[videoNum + 1].file);
 
 	  video.load();
+
 		if(mute == true)
 			video.muted = true;	
 		else

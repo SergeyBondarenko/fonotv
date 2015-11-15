@@ -1,7 +1,7 @@
 # fonotv
 Continuous Video Streaming
 
-# To Do
+# To-Do
 0. DONE! Redirect mobile phones to m.fonotv.com
 1. Check video links for availability
 2. DONE! Get original link for videos

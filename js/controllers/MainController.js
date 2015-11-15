@@ -51,8 +51,7 @@ function playVideo(video_source, videoTag, videoNext){
 	video_link.setAttribute("href",video_source[0].orig_page);
 	video_link_title.textContent = video_source[0].title;
 
-  var video_check_live = document.getElementById(videoTag); 
-  console.log(video_check_live.readyState());
+  console.log(video.readyState);
 
 	//video_next.setAttribute("src",video_source[1].file);
 

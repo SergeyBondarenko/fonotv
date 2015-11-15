@@ -36,10 +36,10 @@ function playVideo(video_source, videoTag, videoNext){
 	var video_link = document.getElementById('orig-link');
 	var video_link_title = document.getElementById('orig-link-title');
 
-	// Test console output
-	//for(var i = 0; i < video_source.length; i++){
-	//  console.log(video_source[i].file);
-	//} 
+	//Test console output
+	for(var i = 0; i < video_source.length; i++){
+	  console.log(video_source[i].file);
+	} 
 	
 	// Play coubs
 	var videoCount = video_source.length; 

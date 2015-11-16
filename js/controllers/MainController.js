@@ -29,12 +29,13 @@ function playVideo(video_source, videoTag, videoNext){
 	var video_link = document.getElementById('orig-link');
 	var video_link_title = document.getElementById('orig-link-title');
 
+	// Randomize video array
 	video_source = randomizer(video_source);
 
-	//Test console output
-	for(var i = 0; i < video_source.length; i++){
-	  console.log(video_source[i].file);
-	} 
+	// Test console output
+	//for(var i = 0; i < video_source.length; i++){
+	//  console.log(video_source[i].file);
+	//} 
 	
 	// Play coubs
 	var videoCount = video_source.length; 
@@ -44,8 +45,6 @@ function playVideo(video_source, videoTag, videoNext){
 	video.setAttribute("src",video_source[videoId].file);
 	video_link.setAttribute("href",video_source[videoId].orig_page);
 	video_link_title.textContent = video_source[videoId].title;
-
-  console.log(video.readyState);
 
 	// Listen for video end and run handler to play other videos
 	video.addEventListener('ended',myHandler,false);
@@ -69,7 +68,14 @@ function playVideo(video_source, videoTag, videoNext){
 		video_link.setAttribute("href",video_source[videoNum].orig_page);
 		video_link_title.textContent = video_source[videoNum].title;
 
-		//video_next.setAttribute("src",video_source[videoNum + 1].file);
+		// Check for errors, play next video if error
+		video.addEventListener('error', function(){
+			videoNum++;
+			videoId = videoNum; // Update global variable to not repeat previous video
+	  	video.setAttribute("src",video_source[videoNum].file);
+			video_link.setAttribute("href",video_source[videoNum].orig_page);
+			video_link_title.textContent = video_source[videoNum].title;
+		}, true);
 
 	  video.load();
 

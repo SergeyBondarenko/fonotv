@@ -8,4 +8,5 @@ Continuous Video Streaming
 3. Setup likes functionality
 4. DONE! Get all videos looped twice
 5. Buffer next video for smoth play; Try to merge videos in a uniq video file
+6. Randomize
 

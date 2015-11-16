@@ -1,32 +1,5 @@
 var LOOP = 0;
-
-//// Check if URL exists
-//function setTheVideoLink(video_array, htmlTag){
-//	var video = document.getElementById(htmlTag); 
-//	var video_link = document.getElementById('orig-link');
-//	var video_link_title = document.getElementById('orig-link-title');
-//	var i = 0;
-//	var link_alive = 0;
-//	while(link_alive == 0){
-//		var request = new XMLHttpRequest();  
-//		request.open('GET', video_array[i], true);
-//		request.onreadystatechange = function(){
-//		    if (request.readyState === 4){
-//		        if (request.status === 404) {  
-//							console.log("Link is dead :-(");
-//							//i++;
-//		        } else if(request.status === 200){
-//							link_alive = 1;
-//							console.log("Link is alive!");
-//							//video.setAttribute("src",video_array[i].file);
-//							//video_link.setAttribute("href",video_array[i].orig_page);
-//							//video_link_title.textContent = video_array[i].title;
-//						}
-//		    } 
-//		};
-//	}
-//	request.send();
-//}
+var mute = true;
 
 // Function to play videos
 function playVideo(video_source, videoTag, videoNext){
@@ -46,14 +19,11 @@ function playVideo(video_source, videoTag, videoNext){
 	var videoId = 0;
 	
 	// Set the first video that starts automatically
-	//setTheVideoLink(video_source, videoTag);
-	video.setAttribute("src",video_source[0].file);
-	video_link.setAttribute("href",video_source[0].orig_page);
-	video_link_title.textContent = video_source[0].title;
+	video.setAttribute("src",video_source[videoId].file);
+	video_link.setAttribute("href",video_source[videoId].orig_page);
+	video_link_title.textContent = video_source[videoId].title;
 
   console.log(video.readyState);
-
-	//video_next.setAttribute("src",video_source[1].file);
 
 	// Listen for video end and run handler to play other videos
 	video.addEventListener('ended',myHandler,false);
@@ -71,7 +41,7 @@ function playVideo(video_source, videoTag, videoNext){
 	}
 
 	// Play all other videos
-	function playVideoForHandler(videoNum, mute)
+	function playVideoForHandler(videoNum)
 	{
 	  video.setAttribute("src",video_source[videoNum].file);
 		video_link.setAttribute("href",video_source[videoNum].orig_page);
@@ -90,7 +60,7 @@ function playVideo(video_source, videoTag, videoNext){
 	}
 
 	function myHandler(){
-		var mute = "";
+		//var mute = "";
 		if(video.muted)
 			mute = true;
 		else
@@ -98,18 +68,13 @@ function playVideo(video_source, videoTag, videoNext){
 
 	  if (videoId == (videoCount - 1)){
 	    videoId = 0;
-	    playVideoForHandler(videoId, mute);
+	    playVideoForHandler(videoId);
 	  } else {
-			if(LOOP == 0){
-	    	playVideoForHandler(videoId, mute);
-				LOOP = 1;
-			} else {
-	    	videoId++;
-	    	playVideoForHandler(videoId, mute);
-				LOOP = 0;
-			}
+	    videoId++;
+	    playVideoForHandler(videoId);
 	  }
-	}
+	} // myHandler
+
 }
 
 var video_source = {};

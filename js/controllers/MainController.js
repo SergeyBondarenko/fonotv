@@ -1,5 +1,6 @@
 var LOOP = 0;
-var mute = true;
+//var mute = true;
+var NEXT = true;
 
 // Randomize
 function randomizer(array) {
@@ -32,7 +33,7 @@ function playVideo(video_source, videoTag, videoNext){
 	// Randomize video array
 	video_source = randomizer(video_source);
 
-	// Test console output
+	//// Test console output
 	//for(var i = 0; i < video_source.length; i++){
 	//  console.log(video_source[i].file);
 	//} 
@@ -46,27 +47,50 @@ function playVideo(video_source, videoTag, videoNext){
 	video_link.setAttribute("href",video_source[videoId].orig_page);
 	video_link_title.textContent = video_source[videoId].title;
 
+	video_next.setAttribute("src",video_source[videoId + 1].file);
+
 	// Listen for video end and run handler to play other videos
 	video.addEventListener('ended',myHandler,false);
 
-	play_music.addEventListener('click', function(){
-  	muteVideo(video); 
-  }, false);
+	//play_music.addEventListener('click', function(){
+  //	muteVideo(video); 
+  //}, false);
 
-	// Mute and unmute
-	function muteVideo(video){
-		if(video.muted)
-			video.muted = false;
-		else
-			video.muted = true;	
-	}
+	//// Mute and unmute
+	//function muteVideo(video){
+	//	if(video.muted)
+	//		video.muted = false;
+	//	else
+	//		video.muted = true;	
+	//}
 
 	// Play all other videos
 	function playVideoForHandler(videoNum)
 	{
-	  video.setAttribute("src",video_source[videoNum].file);
-		video_link.setAttribute("href",video_source[videoNum].orig_page);
-		video_link_title.textContent = video_source[videoNum].title;
+
+		if(NEXT == true){
+			NEXT = false;
+			video_next.style.display = 'block';
+			video.style.display = 'none';
+
+	  	video.setAttribute("src",video_source[videoNum].file);
+			video.load();
+			video_next.play();
+
+			video_link.setAttribute("href",video_source[videoNum].orig_page);
+			video_link_title.textContent = video_source[videoNum].title;
+		} else {
+			NEXT = true;
+			video.style.display = 'block';
+			video_next.style.display = 'none';
+
+	  	video_next.setAttribute("src",video_source[videoNum].file);
+			video_next.load();
+			video.play();
+
+			video_link.setAttribute("href",video_source[videoNum].orig_page);
+			video_link_title.textContent = video_source[videoNum].title;
+		}
 
 		// Check for errors, play next video if error
 		video.addEventListener('error', function(){
@@ -77,22 +101,26 @@ function playVideo(video_source, videoTag, videoNext){
 			video_link_title.textContent = video_source[videoNum].title;
 		}, true);
 
-	  video.load();
 
-		if(mute == true)
-			video.muted = true;	
-		else
-			video.muted = false;
+		//if(mute == true){
+		//	if(NEXT == true)
+		//		video_next.muted = true;
+		//	else
+		//		video.muted = true;	
+		//} else {
+		//	if(NEXT == false)
+		//		video.muted = false;	
+		//	else
+		//		video_next.muted = false;
+		//}
 
-	  video.play();
 	}
 
 	function myHandler(){
-		//var mute = "";
-		if(video.muted)
-			mute = true;
-		else
-			mute = false;
+		//if(video.muted)
+		//	mute = true;
+		//else
+		//	mute = false;
 
 	  if (videoId == (videoCount - 1)){
 	    videoId = 0;
